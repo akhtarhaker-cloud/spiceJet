@@ -130,7 +130,10 @@ create policy "admins manage lists" on public.site_list_items for all using (pub
 create policy "public can view active products" on public.products for select using (is_active = true);
 create policy "admins manage products" on public.products for all using (public.is_admin()) with check (public.is_admin());
 create policy "admins manage media metadata" on public.media_assets for all using (public.is_admin()) with check (public.is_admin());
-create policy "admins manage enquiries" on public.enquiries for all using (public.is_admin()) with check (public.is_admin());
+create policy "public can insert enquiries" on public.enquiries for insert with check (true);
+create policy "admins manage enquiries" on public.enquiries for select using (public.is_admin());
+create policy "admins update enquiries" on public.enquiries for update using (public.is_admin()) with check (public.is_admin());
+create policy "admins delete enquiries" on public.enquiries for delete using (public.is_admin());
 create policy "admins read audit log" on public.admin_audit_log for select using (public.is_admin());
 
 insert into storage.buckets (id, name, public) values ('website-media', 'website-media', true) on conflict (id) do nothing;

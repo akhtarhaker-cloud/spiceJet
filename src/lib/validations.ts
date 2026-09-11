@@ -10,7 +10,7 @@ export const enquirySchema = z.object({
   productName: z.string().trim().min(2).max(160),
   requiredQuantity: z.string().trim().min(1).max(100),
   packagingRequirement: z.string().trim().max(500).optional().or(z.literal("")),
-  message: z.string().trim().max(2000).optional().or(z.literal("")),
+  message: z.string().trim().max(150).optional().or(z.literal("")),
 });
 
 export const productSchema = z.object({
